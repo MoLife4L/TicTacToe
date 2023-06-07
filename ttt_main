@@ -1,0 +1,34 @@
+from  ttt_functions import display_board, player_input, place_marker, win_check, choose_first, space_check, full_board_check, player_choice, replay
+
+
+print('Welcome to Tic Tac Toe!')
+
+while True:  #to keep game running till both loops break 
+    board = ['ES','','','','','','','','',''] #Empty board
+    display_board(board) #Board function 
+    print(f'{choose_first()} Begins!') #Random player begins 
+    p1 = player_input() #player choose letter 
+    p1 = p1.upper() #capitalize players letter
+    if p1 == 'X':
+        p2 = 'O'
+    else:        #determining player 2's letter
+        p2='X'
+    while True:
+        place_marker(board, p1, player_choice(board)) #player 1 selection 
+        display_board(board)
+        if win_check(board, p1) == True: # check to see if player 1 wins after there selection 
+            print(f'CONGRATS {p1} you win!')
+            break #breaks current while loop and moves to next one 
+        if full_board_check(board)==True: #a tie game will only trigger on p1 turn so we check 
+            print("TIE GAME!")
+            break #breaks current while loop and moves to next one 
+        place_marker(board, p2, player_choice(board)) #player 2 selection 
+        display_board(board) #prints board 
+        if win_check(board, p2) == True: #check to see if player 2 wins after there selection 
+            print(f'CONGRATS {p2} you win!')
+            break #breaks current while loop and moves to next one 
+            
+    if replay() == True: # if they choose to replay function will return True boolean 
+        pass
+    else:
+        break #breaks first while loop, game is over
